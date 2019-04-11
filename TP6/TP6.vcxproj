@@ -143,6 +143,25 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Commande.h" />
+    <ClInclude Include="def.h" />
+    <ClInclude Include="erreurcommandevide.h" />
+    <ClInclude Include="erreurfichierintrouvable.h" />
+    <ClInclude Include="erreurplatintrouvable.h" />
+    <ClInclude Include="Filtre.h" />
+    <ClInclude Include="MainGui.h" />
+    <ClInclude Include="mainwindow.h" />
+    <ClInclude Include="Menu.h" />
+    <ClInclude Include="Plat.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Commande.cpp" />
+    <ClCompile Include="Filtre.cpp" />
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="MainGui.cpp" />
+    <ClCompile Include="mainwindow.cpp" />
+    <ClCompile Include="Menu.cpp" />
+    <ClCompile Include="Plat.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
