@@ -51,6 +51,8 @@ void MainWindow::creerWidgetPlatsFiltres(){
 
 //TODO
 void MainWindow::creerWidgetCommande() {
+    widgetCommande_= new QListWidget(this);
+    widgetCommande_->setSortingEnabled(true);
 
 }
 
@@ -68,6 +70,7 @@ void MainWindow::creerWidgetPrix() {
 
 //TODO
 void MainWindow::creerWidgetCommander() {
+   widgetCommander_= new QPushButton(this) ;
 
 }
 
@@ -84,6 +87,7 @@ void MainWindow::designLayout() {
     QWidget* mainWidget = new QWidget();
     mainWidget->setLayout(mainBox);
     setCentralWidget(mainWidget);
+
 }
 
 /*
@@ -103,7 +107,8 @@ void MainWindow::connecterSignauxAuxSlots() {
 
     //TODO
     //connecter boutons ajouterPlat et retirerPlat
-
+    QObject::connect(widgetAjouterPlat_,SIGNAL(clicked()),this,SLOT(insererPlatsChoisisDansCommande()));
+     QObject::connect(widgetRetirerPlat_,SIGNAL(clicked()),this,SLOT(retirerPlatsChoisisDeCommande()));
     //connecter bouton commander
     QObject::connect(widgetCommander_, SIGNAL(clicked()),
                      this, SLOT(commander()));

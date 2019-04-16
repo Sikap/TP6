@@ -22,6 +22,8 @@ int main(int argc, char *argv[])
 
 
 
+
+
         mainGui.show();
         return a.exec();
 
