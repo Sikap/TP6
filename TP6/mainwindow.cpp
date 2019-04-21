@@ -54,6 +54,7 @@ void MainWindow::creerWidgetCommande() {
     widgetCommande_= new QListWidget(this);
     widgetCommande_->setSortingEnabled(true);
 
+
 }
 
 void MainWindow::creerWidgetBoutonsAjouterRetirer() {
@@ -71,7 +72,7 @@ void MainWindow::creerWidgetPrix() {
 //TODO
 void MainWindow::creerWidgetCommander() {
    widgetCommander_= new QPushButton(this) ;
-
+   widgetCommander_->setText(COMMANDER);
 }
 
 
@@ -79,14 +80,54 @@ void MainWindow::creerWidgetCommander() {
 //TODO
 void MainWindow::designLayout() {
 
+    // Titre de la fenêtre
+    string title = "Faire une commande";
+    setWindowTitle(title.c_str());
+
+    // Section contenant les options de filtrage des plats
+    QVBoxLayout* menu = new QVBoxLayout(this);
+    menu->addWidget(widgetTypeMenu_);
+    menu->addWidget(widgetPlatsBios_);
+    menu->addWidget(widgetPlatsVeges_);
+
+    // Option pour Ajouter et Retirer Plat
+    QHBoxLayout* options = new QHBoxLayout(this);
+    options->addWidget(widgetAjouterPlat_);
+    options->addWidget(widgetRetirerPlat_);
+
+    // Liste des plats filtrés
+    QVBoxLayout* choixUsager = new QVBoxLayout(this);
+    choixUsager->addWidget(widgetPlatsFiltres_);
+    choixUsager->addLayout(options);
+    QHBoxLayout* topBox = new QHBoxLayout(this);
+    topBox->addLayout(menu);
+    topBox->addLayout(choixUsager);
+
+    // Trait horizontale
     QFrame* hLine = new QFrame();
     hLine->setFrameShape(QFrame::HLine);
 
+    // Liste des plats contenus dans la commande
+    QHBoxLayout* listeCommande = new QHBoxLayout(this);
+    listeCommande->addWidget(widgetCommande_);
+
+    // Prix actualisé de la commande
+    QHBoxLayout* commandePlacee = new QHBoxLayout(this);
+    commandePlacee->addWidget(widgetPrix_);
+    commandePlacee->addWidget(widgetCommander_);
+
+    QVBoxLayout* bottomBox = new QVBoxLayout(this);
+    bottomBox->addLayout(listeCommande);
+    bottomBox->addLayout(commandePlacee);
+
     QVBoxLayout* mainBox = new QVBoxLayout(this);
+    mainBox->addLayout(topBox);
     mainBox->addWidget(hLine);
+    mainBox->addLayout(bottomBox);
     QWidget* mainWidget = new QWidget();
     mainWidget->setLayout(mainBox);
     setCentralWidget(mainWidget);
+
 
 }
 
@@ -140,12 +181,17 @@ void MainWindow::mettreAJourPlatsCommande(){
 
 //TODO
 void MainWindow::insererPlatsChoisisDansCommande() {
+    commande_->ajouterPlat(widgetPlatsFiltres_->currentItem()->text());
 
 }
 
 //TODO
 void MainWindow::retirerPlatsChoisisDeCommande() {
-
+    try {
+          commande_->retirerPlat(widgetPlatsFiltres_->currentItem()->text());
+      } catch (ErreurPlatIntrouvable erreur) {
+          message(erreur.what());
+      }
 }
 
 void MainWindow::mettreAJourPrix() {

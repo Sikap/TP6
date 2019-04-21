@@ -9,7 +9,7 @@
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
-    QString chemin = ""; // INSERER CHEMIN ABSOLU VERS polyFood.txt
+    QString chemin = "C:\\Users\\skapl\\source\\repos\\TP6\\TP6"; // INSERER CHEMIN ABSOLU VERS polyFood.txt
     try {
         Menu menu = Menu(chemin+FICHIER_POLYFOOD);
         Filtre filtre(&menu);
@@ -19,6 +19,9 @@ int main(int argc, char *argv[])
 
         //TODO
         //Connecter les mises a jour de la vue en fonction du modele (plats filtres + plats commande + prix)
+        QObject::connect(&filtre, &Filtre::choixFiltrageModifie, &mainGui, &MainWindow::mettreAJourPlatsFiltres);
+        QObject::connect(&commande, &Commande::commandeModifie, &mainGui, &MainWindow::mettreAJourPlatsCommande);
+        QObject::connect(&commande, &Commande::commandeModifie, &mainGui, &MainWindow::mettreAJourPrix);
 
 
 
